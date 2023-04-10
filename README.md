@@ -9,6 +9,15 @@
 roslaunch fringa_pkg robmov.launch
 ```
 
+Por defecto carga el `escenario1.world`. Para ejecutar distintos mapas:
+
+```bash
+roslaunch fringa_pkg robmov.launch world_name:=escenario1
+roslaunch fringa_pkg robmov.launch world_name:=escenario2
+roslaunch fringa_pkg robmov.launch world_name:=escenario3
+roslaunch fringa_pkg robmov.launch world_name:=estudio
+```
+
 `explore.launch` Este es el nodo de exploracion que combina la estrategia de exploracion de fronteras con la ganancia de informacion. Tiene algunos parametros modificables. Los mas interesantes son los pesos que se les da a la funcion de coste y el radio de expectativas.
     
 - `potential_scale`. Peso de la distancia euclidea.
