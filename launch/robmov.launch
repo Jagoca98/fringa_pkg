@@ -17,7 +17,9 @@
         <arg name="verbose" value="true"/>
     </include>
 
-    <include file="$(find fringa_pkg)/launch/transformaciones.launch"/>
+    <include file="$(find fringa_pkg)/launch/transformaciones.launch">
+        <arg name="model" value="$(env TURTLEBOT3_MODEL)"/>
+    </include>
 
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
 
