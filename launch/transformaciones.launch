@@ -1,12 +1,40 @@
 <launch>
-    <node name="basefootprintbaselink" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.010 0 0 0 1 base_footprint base_link"/>
-    <node name="baselinkleftwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 0.144 0.023 -0.707 0 0 0.707 base_link wheel_left_link"/>
-    <node name="baselinkrightwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 -0.144 0.023 -0.707 0 0 0.707 base_link wheel_right_link"/>
-    <node name="baselinkcasterbackright" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 -0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_right_link"/>
-    <node name="baselinkcasterbackleft" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_left_link"/>
-    <node name="baselinkimu" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.068 0 0 0 1 base_link imu_link"/>
-    <node name="baselinkscan" pkg="tf2_ros" type="static_transform_publisher" args="-0.064 0 0.122 0 0 0 1 base_link base_scan"/>
-    <node name="baselinkcamera" pkg="tf2_ros" type="static_transform_publisher" args="0.073 -0.011 0.084 0 0 0 1 base_link camera_link"/>
-    <node name="cameracameraRGB" pkg="tf2_ros" type="static_transform_publisher" args="0.003 0.011 0.009 0 0 0 1 camera_link camera_rgb_frame"/>
-    <node name="cameracameraRGBoptical" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0.5 -0.5 0.5 0.5 camera_rgb_frame camera_rgb_optical_frame"/>
+    <arg name="model" default="burger"/>
+
+    <group if="$(eval model == 'burger')">
+        <node name="basefootprintbaselink" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.010 0 0 0 1 base_footprint base_link"/>
+        <node name="baselinkleftwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 0.08 0.023 -0.707 0 0 0.707 base_link wheel_left_link"/>
+        <node name="baselinkrightwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 -0.08 0.023 -0.707 0 0 0.707 base_link wheel_right_link"/>
+        <node name="baselinkcasterbacklink" pkg="tf2_ros" type="static_transform_publisher" args="-0.081 0 -0.004 -0.707 0 0 0.707 base_link caster_back_link"/>
+        <node name="baselinkimu" pkg="tf2_ros" type="static_transform_publisher" args="-0.032 0 0.068 0 0 0 1 base_link imu_link"/>
+        <node name="baselinkscan" pkg="tf2_ros" type="static_transform_publisher" args="-0.032 0 0.172 0 0 0 1 base_link base_scan"/>
+    </group>
+
+    <group if="$(eval model == 'waffle_pi')">
+        <node name="basefootprintbaselink" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.010 0 0 0 1 base_footprint base_link"/>
+        <node name="baselinkleftwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 0.144 0.023 -0.707 0 0 0.707 base_link wheel_left_link"/>
+        <node name="baselinkrightwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 -0.144 0.023 -0.707 0 0 0.707 base_link wheel_right_link"/>
+        <node name="baselinkcasterbackright" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 -0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_right_link"/>
+        <node name="baselinkcasterbackleft" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_left_link"/>
+        <node name="baselinkimu" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.068 0 0 0 1 base_link imu_link"/>
+        <node name="baselinkscan" pkg="tf2_ros" type="static_transform_publisher" args="-0.064 0 0.122 0 0 0 1 base_link base_scan"/>
+        <node name="baselinkcamera" pkg="tf2_ros" type="static_transform_publisher" args="0.073 -0.011 0.084 0 0 0 1 base_link camera_link"/>
+        <node name="cameracameraRGB" pkg="tf2_ros" type="static_transform_publisher" args="0.003 0.011 0.009 0 0 0 1 camera_link camera_rgb_frame"/>
+        <node name="cameracameraRGBoptical" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0.5 -0.5 0.5 0.5 camera_rgb_frame camera_rgb_optical_frame"/>
+    </group>
+
+    <group if="$(eval model == 'waffle')">
+        <node name="basefootprintbaselink" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.010 0 0 0 1 base_footprint base_link"/>
+        <node name="baselinkleftwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 0.144 0.023 -0.707 0 0 0.707 base_link wheel_left_link"/>
+        <node name="baselinkrightwheel" pkg="tf2_ros" type="static_transform_publisher" args="0 -0.144 0.023 -0.707 0 0 0.707 base_link wheel_right_link"/>
+        <node name="baselinkcasterbackright" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 -0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_right_link"/>
+        <node name="baselinkcasterbackleft" pkg="tf2_ros" type="static_transform_publisher" args="-0.177 0.064 -0.004 -0.707 0 0 0.707 base_link caster_back_left_link"/>
+        <node name="baselinkimu" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0.068 0 0 0 1 base_link imu_link"/>
+        <node name="baselinkscan" pkg="tf2_ros" type="static_transform_publisher" args="-0.064 0 0.122 0 0 0 1 base_link base_scan"/>
+        <node name="baselinkcamera" pkg="tf2_ros" type="static_transform_publisher" args="0.064 -0.065 0.094 0 0 0 1 base_link camera_link"/>
+        <node name="cameracameraRGB" pkg="tf2_ros" type="static_transform_publisher" args="0.003 0.011 0.009 0 0 0 1 camera_link camera_rgb_frame"/>
+        <node name="cameracameraRGBoptical" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0.5 -0.5 0.5 0.5 camera_rgb_frame camera_rgb_optical_frame"/>
+        <node name="cameracameradepth" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 1 camera_link camera_depth_frame"/>
+        <node name="cameracameradepthoptical" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 1 camera_depth_frame camera_depth_optical_frame"/>
+    </group>
 </launch>
