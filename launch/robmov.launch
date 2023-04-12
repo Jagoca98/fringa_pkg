@@ -5,6 +5,7 @@
     <arg name="x_pos" default="1.0"/>
     <arg name="y_pos" default="-4.0"/>
     <arg name="z_pos" default="0.0"/>
+    <arg name="octomapping" default="false"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <!-- <arg name="world_name" value="$(find robots_moviles)/worlds/$(arg world_name).world"/> -->
@@ -35,6 +36,15 @@
 
     <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping.launch">
     </include>
+
+    <group if="$(arg octomapping)">
+        <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+            <param name="resolution" value="0.05" />
+            <param name="frame_id" type="string" value="odom" />
+            <param name="sensor_model/max_range" value="5.0" />
+            <remap from="cloud_in" to="/camera/depth/points" />
+        </node>
+    </group>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find fringa_pkg)/rviz/config_explore.rviz"/>
 
