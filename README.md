@@ -20,11 +20,15 @@ roslaunch fringa_pkg robmov.launch world_name:=estudio
 
 `explore.launch` Este es el nodo de exploracion que combina la estrategia de exploracion de fronteras con la ganancia de informacion. Tiene algunos parametros modificables. Los mas interesantes son los pesos que se les da a la funcion de coste y el radio de expectativas.
     
-- `potential_scale`. Peso de la distancia euclidea.
-- `gain_entropy`. Peso de la ganancia de informacion.
-- `gain_obstacle`. Penalizacion por los obstáculos.
+- `potential_scale`. Peso de la distancia euclidea $k_d$.
+- `gain_entropy`. Peso de la ganancia de informacion $k_i$.
+- `gain_obstacle`. Penalizacion por los obstáculos $k_f$.
 - `min_frontier_size`. Tamaño de frontera minimo para que se considere frontera (Esto sirve para purgar ruido).
 - `expected_radius`. Radio de expectativas
+
+La función de coste de la exploración es la siguiente:
+$$U_{health} = k_d \cdot d - k_i \cdot f(k_f) \cdot IG$$
+
 
 ```bash
 roslaunch fringa_pkg explore.launch
