@@ -112,6 +112,14 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
@@ -211,7 +219,7 @@ Visualization Manager:
       Marker Topic: /frontiered_IG/frontiers
       Name: MarkerArray
       Namespaces:
-        frontiers: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -219,7 +227,15 @@ Visualization Manager:
       Marker Topic: /frontiered_IG/radios
       Name: MarkerArray
       Namespaces:
-        radios: true
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /occupied_cells_vis_array
+      Name: MarkerArray
+      Namespaces:
+        map: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -250,7 +266,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.329565048217773
+      Distance: 10.46196174621582
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -258,17 +274,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 3.9941256046295166
-        Y: 2.6886465549468994
-        Z: 1.7120661735534668
+        X: 2.7827630043029785
+        Y: -3.385159969329834
+        Z: -0.3509112596511841
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6547971367835999
+      Pitch: 0.5297977924346924
       Target Frame: <Fixed Frame>
-      Yaw: 0.5903985500335693
+      Yaw: 0.6704087853431702
     Saved: ~
 Window Geometry:
   Displays:
@@ -287,4 +303,4 @@ Window Geometry:
     collapsed: true
   Width: 1465
   X: 455
-  Y: 85
+  Y: 48
