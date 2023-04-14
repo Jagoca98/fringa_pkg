@@ -72,6 +72,10 @@ Explore::Explore()
   private_nh_.param("expected_radius", expected_radius_, 5.5);
   private_nh_.param("gain_entropy", gain_entropy_, 1.0);
   private_nh_.param("gain_obstacle", obstacle_gain_, 10.0);
+  
+  // Las dos siguientes lineas son para publicar cuando se ha detenido la exploracion
+  exploration_end_ = private_nh_.advertise<std_msgs::Bool>("exploration_ended", 10);
+  finished_.data = false;
 
   time_init = ros::Time::now();
 
@@ -340,6 +344,8 @@ void Explore::makePlan()
   if (frontier == frontiers.end()) {
     stop();
     return;
+  }else{
+    exploration_end_.publish(finished_);
   }
 
   geometry_msgs::Point target_position = frontier->goal;
@@ -430,6 +436,9 @@ void Explore::stop()
   ros::Time time_exec;
   time_exec.sec = time_end.sec-time_init.sec;
   time_exec.nsec = time_end.nsec-time_init.nsec;
+  finished_.data = true;
+  exploration_end_.publish(finished_);
+
 
   //HASTA AQUI
   ROS_INFO("Exploration time: %f", time_exec.toSec());

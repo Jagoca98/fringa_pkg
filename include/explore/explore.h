@@ -48,6 +48,7 @@
 #include <move_base_msgs/MoveBaseAction.h>
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <std_msgs/Bool.h>
 
 #include <explore/costmap_client.h>
 #include <explore/frontier_search.h>
@@ -96,6 +97,7 @@ private:
   ros::NodeHandle relative_nh_;
   ros::Publisher marker_array_publisher_;
   ros::Publisher marker_array_publisher_areas_;
+  ros::Publisher exploration_end_;
   tf::TransformListener tf_listener_;
 
   Costmap2DClient costmap_client_;
@@ -110,6 +112,8 @@ private:
   double prev_distance_;
   ros::Time last_progress_;
   size_t last_markers_count_;
+  std_msgs::Bool finished_;
+
 
   // parameters
   double planner_frequency_;
