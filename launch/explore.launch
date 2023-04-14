@@ -3,6 +3,7 @@
     <param name="robot_base_frame" value="base_link"/>
     <param name="costmap_topic" value="map"/>
     <param name="costmap_updates_topic" value="map_updates"/>
+    <param name="publish_topic" value="/the_end_of_explorations"/> <!-- Topic de exploracion terminada -->
     <param name="visualize" value="true"/> <!-- Permite visualizar en rviz -->
     <param name="planner_frequency" value="0.33"/> <!-- Frecuencia de replanning -->
     <param name="progress_timeout" value="30.0"/> <!-- Tiempo para las recovery actions -->
