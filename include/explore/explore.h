@@ -123,6 +123,7 @@ private:
   double distance_tolerance_;
   double expected_radius_;
   double obstacle_gain_;
+  std::string publish_topic_;
 
   // time execution measure
   ros::Time time_end;

@@ -72,9 +72,10 @@ Explore::Explore()
   private_nh_.param("expected_radius", expected_radius_, 5.5);
   private_nh_.param("gain_entropy", gain_entropy_, 1.0);
   private_nh_.param("gain_obstacle", obstacle_gain_, 10.0);
+  private_nh_.param("publish_topic", publish_topic_, std::string("/exploration_ended"));
   
   // Las dos siguientes lineas son para publicar cuando se ha detenido la exploracion
-  exploration_end_ = private_nh_.advertise<std_msgs::Bool>("exploration_ended", 10);
+  exploration_end_ = private_nh_.advertise<std_msgs::Bool>(publish_topic_, 10);
   finished_.data = false;
 
   time_init = ros::Time::now();
