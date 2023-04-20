@@ -64,6 +64,12 @@ CATKIN_IGNORE
 # Built Visual Studio Code Extensions
 *.vsix
 
+*.vscode/settings.json
+*.vscode/tasks.json
+*.vscode/launch.json
+*.vscode/extensions.json
+*.vscode/*.code-snippets
+
 .vscode/settings.json
 .vscode/tasks.json
 .vscode/launch.json
