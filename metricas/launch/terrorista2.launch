@@ -1,0 +1,7 @@
+<launch>
+  <arg name="my_argument" default="default_value" />
+  
+  <node name="my_node" pkg="metricas" type="terrorista2.py" output="screen">
+    <param name="my_param" value="$(arg my_argument)" />
+  </node>
+</launch>

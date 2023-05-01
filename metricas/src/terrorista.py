@@ -10,7 +10,11 @@ from metricas import EvalMap
 
 
 cmd_find = ["rospack", "find", "metricas"]
-token = 'escenario1'
+# token = 'escenario1'
+
+# print(rospy.has_param('metricas/world_name_tag'))
+token = rospy.get_param('carlosYagus/world_name_tag', 'escenario1')
+print(token)
 pwd = subprocess.run(cmd_find, capture_output=True, text=True)
 path_server = str(pwd.stdout).split('\n')[0] + '/maps/explored_maps/' + token
 path_gt = str(pwd.stdout).split('\n')[0] + '/maps/gt_maps/' + token + '_gt.pgm'
@@ -43,7 +47,7 @@ class Terroristas():
             
 
             
-        
+ 
     def listener(self):
 
         # In ROS, nodes are uniquely named. If two nodes with the same
@@ -60,7 +64,8 @@ class Terroristas():
 
 if __name__ == '__main__':
     
-    pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)    
+    pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)
+
     carlosYagus = Terroristas()
     carlosYagus.listener()
     rate = rospy.Rate(1)

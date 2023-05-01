@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="metricas" type="terrorista.py" respawn="true" name="carlosYagus" output="screen"/>
+    <arg name="world_name" default="escenario1"/>
+
+    <node pkg="metricas" type="terrorista.py" respawn="true" name="carlosYagus" output="screen">
+        <param name="world_name_tag" value="$(arg world_name)"/>
+    </node>
 </launch>
