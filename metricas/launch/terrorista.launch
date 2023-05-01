@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="metricas" type="terrorista.py" respawn="false" name="carlosYagus" output="screen"/>
+    <node pkg="metricas" type="terrorista.py" respawn="true" name="carlosYagus" output="screen"/>
 </launch>

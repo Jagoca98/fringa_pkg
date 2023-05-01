@@ -48,6 +48,6 @@
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find fringa_pkg)/rviz/config_explore.rviz"/>
 
-    <!-- <include file="$(find metricas)/launch/terrorista.launch"/> -->
+    <include file="$(find metricas)/launch/terrorista.launch"/>
 
 </launch>
