@@ -1,4 +1,4 @@
-image: /home/jaime/Desktop/catkin_ws/src/fringa/metricas/maps/map.pgm
+image: escenario1_gt.pgm
 resolution: 0.050000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0

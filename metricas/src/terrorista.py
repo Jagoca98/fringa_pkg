@@ -6,9 +6,16 @@ import subprocess
 from std_msgs.msg import Bool
 import rospy
 from move_base_msgs.msg import MoveBaseActionGoal
+from metricas import EvalMap
 
 
 cmd_find = ["rospack", "find", "metricas"]
+token = 'escenario1'
+pwd = subprocess.run(cmd_find, capture_output=True, text=True)
+path_server = str(pwd.stdout).split('\n')[0] + '/maps/explored_maps/' + token
+path_gt = str(pwd.stdout).split('\n')[0] + '/maps/gt_maps/' + token + '_gt.pgm'
+save_path = str(pwd.stdout).split('\n')[0] + '/maps/differences/' + token + '_differences.jpg'
+path = str(pwd.stdout).split('\n')[0] + '/maps/explored_maps/' + token + '.pgm'
 
 
 class Terroristas():
@@ -29,13 +36,11 @@ class Terroristas():
     def callback(self, data):
         if data.data == True:
             rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-            pwd = subprocess.run(cmd_find, capture_output=True, text=True)
-            path = str(pwd.stdout).split('\n')[0] + '/maps/map'
-            # print(str(pwd.stdout.split('\n')[0]))
-            # print(path)
-            # cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path)]
-            # subprocess.run(cmd_save, stdout = True)
+            print(path_server)
+            cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path_server)]
+            subprocess.run(cmd_save, stdout = True)
             self.end = True
+            
 
             
         
@@ -63,4 +68,6 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         if carlosYagus.end:
             pub.publish(carlosYagus.initialPose)
+            EvalMap.run(path_gt=path_gt, path=path)
+            break
         rate.sleep()
