@@ -42,7 +42,6 @@ class Terroristas():
     def callback(self, data):
         
         rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-        print(path_server)
         cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path_server)]
         subprocess.run(cmd_save, stdout = True)
         self.pub.publish(carlosYagus.initialPose)
