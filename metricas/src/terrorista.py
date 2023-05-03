@@ -6,13 +6,12 @@ import subprocess
 from std_msgs.msg import Bool
 import rospy
 from move_base_msgs.msg import MoveBaseActionGoal
-from metricas import EvalMap
+from metricas_utils import EvalMap
 from metricas.msg import Errores
 
 
 cmd_find = ["rospack", "find", "metricas"]
 token = rospy.get_param('carlosYagus/world_name_tag', 'escenario1')
-print(token)
 pwd = subprocess.run(cmd_find, capture_output=True, text=True)
 path_server = str(pwd.stdout).split('\n')[0] + '/maps/explored_maps/' + token
 path_gt = str(pwd.stdout).split('\n')[0] + '/maps/gt_maps/' + token + '_gt.pgm'
