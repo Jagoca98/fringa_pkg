@@ -10,9 +10,6 @@ from metricas import EvalMap
 
 
 cmd_find = ["rospack", "find", "metricas"]
-# token = 'escenario1'
-
-# print(rospy.has_param('metricas/world_name_tag'))
 token = rospy.get_param('carlosYagus/world_name_tag', 'escenario1')
 print(token)
 pwd = subprocess.run(cmd_find, capture_output=True, text=True)
@@ -34,45 +31,23 @@ class Terroristas():
             self.initialPose.goal.target_pose.pose.orientation.y = 0
             self.initialPose.goal.target_pose.pose.orientation.z = 0
             self.initialPose.goal.target_pose.pose.orientation.w = 1
-            self.listener()
+            rospy.init_node('carloYagus', anonymous=True)
+            rospy.Subscriber("/the_end_of_explorations", Bool, self.callback)
+            self.pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)
+            
             
 
     def callback(self, data):
-        if data.data == True:
-            rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-            print(path_server)
-            cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path_server)]
-            subprocess.run(cmd_save, stdout = True)
-            self.end = True
-            
-
-            
- 
-    def listener(self):
-
-        # In ROS, nodes are uniquely named. If two nodes with the same
-        # name are launched, the previous one is kicked off. The
-        # anonymous=True flag means that rospy will choose a unique
-        # name for our 'listener' node so that multiple listeners can
-        # run simultaneously.
-        rospy.init_node('carloYagus', anonymous=True)
-
-        rospy.Subscriber("/the_end_of_explorations", Bool, self.callback)
-
-        # spin() simply keeps python from exiting until this node is stopped
-        # rospy.spin()
+        rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+        print(path_server)
+        cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path_server)]
+        subprocess.run(cmd_save, stdout = True)
+        self.pub.publish(carlosYagus.initialPose)
+        EvalMap.run(path_gt=path_gt, path=path)           
 
 if __name__ == '__main__':
     
     pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)
 
     carlosYagus = Terroristas()
-    carlosYagus.listener()
-    rate = rospy.Rate(1)
-    
-    while not rospy.is_shutdown():
-        if carlosYagus.end:
-            pub.publish(carlosYagus.initialPose)
-            EvalMap.run(path_gt=path_gt, path=path)
-            break
-        rate.sleep()
+    rospy.spin()

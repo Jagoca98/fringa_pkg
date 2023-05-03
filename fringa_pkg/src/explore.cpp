@@ -346,7 +346,7 @@ void Explore::makePlan()
     stop();
     return;
   }else{
-    exploration_end_.publish(finished_);
+    // exploration_end_.publish(finished_);
   }
 
   geometry_msgs::Point target_position = frontier->goal;
