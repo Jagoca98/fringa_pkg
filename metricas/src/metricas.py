@@ -149,7 +149,7 @@ class EvalMap():
             2: cls.issim
         }
         for attr, value in options.items():
-            value(groundtruth,slammap)
+            value(groundtruth, slammap)
 
 if __name__ == '__main__':
     EvalMap.run(path_gt=path_gt, path=path)
