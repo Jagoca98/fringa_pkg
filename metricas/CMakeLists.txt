@@ -49,7 +49,7 @@ add_message_files(
    FILES
 #   Message1.msg
 #   Message2.msg
-    error.msg
+    Errores.msg
 )
 
 ## Generate services in the 'srv' folder

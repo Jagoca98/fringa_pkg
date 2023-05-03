@@ -6,6 +6,7 @@ import subprocess
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity as ssim
+from metricas.msg import Errores
 
 
 token = 'escenario1'
@@ -63,6 +64,7 @@ class EvalMap():
         sume = np.sum(dist)
         print("sum of error: ", sume)
         print("normalize error (NE):", (sume/ncells), "\n")
+        return(sume/ncells)
 
 
     # using mean square error
@@ -84,10 +86,12 @@ class EvalMap():
     def issim(imageA,imageB):
         e = ssim(imageA,imageB)
         print("Structure similarity index: (SSIM)", e)
+        return e
 
 
     @classmethod
     def run(cls, path_gt, path):
+        # error
         ############################MAIN PROGRAM###################################
         # I. FIRST STEP: IMAGE REGISTRATION
         # the SLAM map will be aligned to the groundtruth map using ECC algorithm
@@ -143,13 +147,18 @@ class EvalMap():
 
         # II. STEP 2, measure the error between the groundtruth amd the aligned slam map using knearest neighbour searvh, k = 1
 
-        options = {
-            0: cls.nearest_error,
-            1: cls.mse,
-            2: cls.issim
-        }
-        for attr, value in options.items():
-            value(groundtruth, slammap)
+        errores = Errores()
+
+        errores.nearest = cls.nearest_error(groundtruth, slammap)
+        errores.mse = cls.mse(groundtruth, slammap)
+        errores.issim = cls.issim(groundtruth, slammap)
+        # errores = {}
+
+        # errores['nearest'] = cls.nearest_error(groundtruth, slammap)
+        # errores['mse'] = cls.mse(groundtruth, slammap)
+        # errores['issim'] = cls.issim(groundtruth, slammap)
+
+        return errores
 
 if __name__ == '__main__':
     EvalMap.run(path_gt=path_gt, path=path)

@@ -7,6 +7,7 @@ from std_msgs.msg import Bool
 import rospy
 from move_base_msgs.msg import MoveBaseActionGoal
 from metricas import EvalMap
+from metricas.msg import Errores
 
 
 cmd_find = ["rospack", "find", "metricas"]
@@ -31,19 +32,23 @@ class Terroristas():
             self.initialPose.goal.target_pose.pose.orientation.y = 0
             self.initialPose.goal.target_pose.pose.orientation.z = 0
             self.initialPose.goal.target_pose.pose.orientation.w = 1
+            self.errores = Errores()
             rospy.init_node('carloYagus', anonymous=True)
             rospy.Subscriber("/the_end_of_explorations", Bool, self.callback)
             self.pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)
+            self.pub_error = rospy.Publisher("/errores", Errores, queue_size=10)
             
             
 
     def callback(self, data):
+        
         rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
         print(path_server)
         cmd_save = ["rosrun", "map_server", "map_saver", "-f", str(path_server)]
         subprocess.run(cmd_save, stdout = True)
         self.pub.publish(carlosYagus.initialPose)
-        EvalMap.run(path_gt=path_gt, path=path)           
+        errores = EvalMap.run(path_gt=path_gt, path=path)
+        self.pub_error.publish(errores)        
 
 if __name__ == '__main__':
     
