@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="metricas" type="trajectory.py" respawn="false" name="trajectory" output="screen">
+    </node>
+</launch>
