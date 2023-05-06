@@ -49,6 +49,7 @@
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Float64.h>
 
 #include <explore/costmap_client.h>
 #include <explore/frontier_search.h>
@@ -112,7 +113,7 @@ private:
   double prev_distance_;
   ros::Time last_progress_;
   size_t last_markers_count_;
-  std_msgs::Bool finished_;
+  std_msgs::Float64 finished_;
 
 
   // parameters

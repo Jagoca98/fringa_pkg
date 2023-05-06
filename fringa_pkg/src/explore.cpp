@@ -75,7 +75,7 @@ Explore::Explore()
   private_nh_.param("publish_topic", publish_topic_, std::string("/exploration_ended"));
   
   // Las dos siguientes lineas son para publicar cuando se ha detenido la exploracion
-  exploration_end_ = private_nh_.advertise<std_msgs::Bool>(publish_topic_, 10);
+  exploration_end_ = private_nh_.advertise<std_msgs::Float64>(publish_topic_, 10);
   finished_.data = false;
 
   time_init = ros::Time::now();
@@ -437,7 +437,7 @@ void Explore::stop()
   ros::Time time_exec;
   time_exec.sec = time_end.sec-time_init.sec;
   time_exec.nsec = time_end.nsec-time_init.nsec;
-  finished_.data = true;
+  finished_.data = time_exec.toSec();
   exploration_end_.publish(finished_);
 
 
