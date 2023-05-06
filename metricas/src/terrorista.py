@@ -3,7 +3,7 @@
 
 import rospy
 import subprocess
-from std_msgs.msg import Bool
+from std_msgs.msg import Float64
 import rospy
 from move_base_msgs.msg import MoveBaseActionGoal
 from metricas_utils import EvalMap
@@ -33,7 +33,7 @@ class Terroristas():
             self.initialPose.goal.target_pose.pose.orientation.w = 1
             self.errores = Errores()
             rospy.init_node('carloYagus', anonymous=True)
-            rospy.Subscriber("/the_end_of_explorations", Bool, self.callback)
+            rospy.Subscriber("/the_end_of_explorations", Float64, self.callback)
             self.pub = rospy.Publisher("/move_base/goal", MoveBaseActionGoal, queue_size=10)
             self.pub_error = rospy.Publisher("/errores", Errores, queue_size=10)
             
