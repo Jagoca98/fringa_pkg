@@ -1,0 +1,3 @@
+float64 distance
+float64 exploration_time
+Errores errors
