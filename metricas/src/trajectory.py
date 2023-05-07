@@ -14,7 +14,7 @@ tiempo_fin = time()
 tiempo_init = time()
 first_time = True
 exploration_on = True
-pub = rospy.Publisher("/distance", Metricas, queue_size=10)
+pub = rospy.Publisher("/metrics", Metricas, queue_size=10)
 
 def callback_trajectory(msg):
     global trajectory, tiempo_init, tiempo_fin, first_time, exploration_on
