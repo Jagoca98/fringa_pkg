@@ -8,7 +8,6 @@
     <arg name="octomapping" default="false"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <!-- <arg name="world_name" value="$(find robots_moviles)/worlds/$(arg world_name).world"/> -->
         <arg name="world_name" value="$(find robots_moviles)/worlds/$(arg world_name).world"/>
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
@@ -30,10 +29,6 @@
         <arg name="move_forward_only" default="false"/>
     </include> 
 
-    <!-- <include file="$(find turtlebot3_navigation)/launch/move_base.launch">
-        <arg name="move_forward_only" default="false"/>
-    </include>  -->
-
     <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping.launch">
     </include>
 
@@ -48,9 +43,9 @@
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find fringa_pkg)/rviz/config_explore.rviz"/>
 
-    <include file="$(find metricas)/launch/terrorista.launch">
-        <arg name="world_name" value="$(arg world_name)"/>
-    </include>
+    <node pkg="metricas" type="terrorista.py" respawn="true" name="carlosYagus" output="screen">
+        <param name="world_name_tag" value="$(arg world_name)"/>
+    </node>
 
     <include file="$(find metricas)/launch/trajectory.launch"/>
 
