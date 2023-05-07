@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # license removed for brevity
 
-# import rospy
+import rospy
 import subprocess
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity as ssim
 from metricas.msg import Errores
 
-
-token = 'escenario1'
+token = rospy.get_param('carlosYagus/world_name_tag', 'escenario1')
 cmd_find = ["rospack", "find", "metricas"]
 
 pwd = subprocess.run(cmd_find, capture_output=True, text=True)
